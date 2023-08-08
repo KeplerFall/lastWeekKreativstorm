@@ -8,6 +8,7 @@ let modules = document.querySelector('.modules');
 let divde = document.querySelector('.divde');
 let multiply = document.querySelector('.multiply');
 let sum = document.querySelector('.sum');
+let subtract = document.querySelector('.subtract');
 let results = document.getElementById("results");
 
 num.forEach(n => {
@@ -20,26 +21,54 @@ num.forEach(n => {
 });
 
 sum.addEventListener('click',function(){
+    clear();
+    calculate('sum');
+})
+divde.addEventListener('click',function(){
+    clear();
+    calculate('divde');
+})
+multiply.addEventListener('click',function(){
+    clear();
+    calculate('multiply');
+})
+subtract.addEventListener('click',function(){
+    clear();
+    calculate('subtract');
+})
+
+
+const calculate = (operator) => {
     if(calc_arr.length == 0){
         calc_arr.push(first_num);
         clear();
     } else {
-        calc_arr.push(first_num);
-        let add_num = 0;
-        calc_arr.forEach(num =>{
-            add_num += num;
-            showInput(add_num);
-            console.log(calc_arr);
-            console.log(add_num);
-        })
+        calc_arr.push(first_num);  
+        let intial = 0;      
+        switch (operator) {
+            case 'sum':
+                intial =  calc_arr[0]+first_num;
+                    break;
+                case 'divde':
+                    intial =  calc_arr[0]/first_num;
+                    break;
+                case 'multiply':
+                    intial =  calc_arr[0]*first_num;
+                    break;
+                case 'subtract':
+                    intial =  calc_arr[0]-first_num;
+                    break;
+                default:
+                    break;
+            }
+        showInput(intial);
     }
-})
-
+}
 const showInput = (number) =>{
 return results.value = number;
 }
 
 const clear = () =>{
    arr = [];
-   return results.value = 0;
+   showInput(0);
 }
