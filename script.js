@@ -1,4 +1,6 @@
 let arr = [];
+let calc_arr = [];
+let first_num;
 
 let num = document.querySelectorAll('.number');
 let equal = document.querySelector('.equal');
@@ -12,15 +14,32 @@ num.forEach(n => {
     n.addEventListener('click',function(event){
         let new_number = event.target.value;
         arr.push(new_number);
-        showInput(Number(arr.join('')));
+        first_num = Number(arr.join(''))
+        showInput(first_num);
     })
 });
 
-const addNumber = () =>{
-    sum.addEventListener('click',function(){
-        
-    })
+sum.addEventListener('click',function(){
+    if(calc_arr.length == 0){
+        calc_arr.push(first_num);
+        clear();
+    } else {
+        calc_arr.push(first_num);
+        let add_num = 0;
+        calc_arr.forEach(num =>{
+            add_num += num;
+            showInput(add_num);
+            console.log(calc_arr);
+            console.log(add_num);
+        })
+    }
+})
+
+const showInput = (number) =>{
+return results.value = number;
 }
-const showInput = (arr) =>{
-return results.value = arr;
+
+const clear = () =>{
+   arr = [];
+   return results.value = 0;
 }
