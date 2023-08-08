@@ -77,63 +77,85 @@ th {
     padding-bottom: 20px;
 }
 
+/*----- MEDIA QUERIES FOR ACCESSIBILITY -----*/
+
+/* Reduced motion */
+
+@media only screen and (prefers-reduced-motion: reduce) {
+    input[type="button"]:hover {
+        opacity: 1;
+    }
+}
+
+/* Prefers contrast: more */
+
 @media only screen and (prefers-contrast: more) {
-    body {
-        background: #fff;
-    }
-    table {
-        border: 1px solid #fff;
-        background: #000;
-        box-shadow: none;
-    }
-    input {
-        background: #fff;
-    }
-    @media only screen and (prefers-reduced-motion: reduce) {
-        input:hover {
+    .number, .decimal {
+            background-color: #f6f6f6;
+            color: #333;
+        }
+        .sum, .subtract, .multiply, .divde, .modules, .equal {
+            background-color: #d76c2c;
+            color: #fff;
+        }
+        .clear-input {
+            background-color: #ff4941;
+            color: #fff;
+        }
+}
+
+/* Prefers color scheme: light + prefers contrast: more */
+
+@media only screen and (prefers-color-scheme: light) {
+    @media only screen and (prefers-contrast: more) {
+        body {
+            background: #fff;
+        }
+        main {
+            background: #000;
+        }
+        #results {
             background: #fff;
         }
     }
+
 }
+
+/* Prefers color scheme: dark */
+
 @media only screen and (prefers-color-scheme: dark) {
     body {
         background: #303438;
         color: #fff;
     }
-    table {
-        border: 1px solid #888;
-        background: #444;
+    main {
+        background: #aaa;
         box-shadow: 8px 8px 0 0 #000;
     }
+    #results {
+        background: #ccc;
+    }
+    .number, .decimal {
+            background-color: #e6e6e6;
+            color: #333;
+        }
+    table {
+        background: #444;
+    }
     input {
-        background: #aaeeee;
         padding: 10px 15px;
         border-radius: 5px;
     }
-    input:hover {
-        background: #bbffff;
-    }
-    @media only screen and (prefers-reduced-motion: reduce) {
-        input:hover {
-            background: #aaeeee;
-        }
-    }
+    
+    /*Prefers color scheme: dark + prefers contrast: more */
+    
     @media only screen and (prefers-contrast: more) {
         body {
             background: #000000;
             color: #fff;
         }
         table {
-            background: #fff;
-            border-color: #000;
-        }
-        input {
-            background: #66eeee;
-        }
-        @media only screen and (prefers-reduced-motion: reduce) {
-            input:hover {
-                background: #66eeee;
-            }
+            background: #000;
         }
     }
 }
