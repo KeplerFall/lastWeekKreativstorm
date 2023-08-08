@@ -1,14 +1,80 @@
+
 body {
-	padding: 0;
-	margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    color: #333;
 }
+
+main {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+
+#results {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 1.6em;
+    text-align: right;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+
+
+input[type="button"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+.number, .decimal {
+    background-color: #e6e6e6;
+    color: #333;
+}
+
+.sum, .subtract, .multiply, .divde, .modules, .equal {
+    background-color: #f78c6c;
+    color: #fff;
+}
+
+.clear-input {
+    background-color: #ff6961;
+    color: #fff;
+}
+
+input[type="button"]:hover {
+    opacity: 0.9;
+}
+
 
 table {
-	margin: 30px auto;
+    width: 100%;
+    border-collapse: collapse;
 }
 
-table #cellzero {
-	width: 100%;
+td {
+    width: 25%;
+    padding: 5px;
+}
+
+th {
+    padding-bottom: 20px;
 }
 
 @media only screen and (prefers-contrast: more) {
