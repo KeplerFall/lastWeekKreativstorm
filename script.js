@@ -1,84 +1,71 @@
-let arr = []; //store clicked numbers 
-let calc_arr = []; //use it store numbers for calculations
-let first_num; // join() arr numbers 
-
-let num = document.querySelectorAll('.number');
+let numButton = document.querySelectorAll('.number');
 let equal = document.querySelector('.equal');
-let modules = document.querySelector('.modules');
-let divde = document.querySelector('.divde');
-let multiply = document.querySelector('.multiply');
-let sum = document.querySelector('.sum');
-let subtract = document.querySelector('.subtract');
-let results = document.getElementById("results");
-let clearInput = document.querySelector('.clear-input');
+let operator = document.querySelectorAll('.operator');
+let currentNum = document.getElementById("results");
+let clearAll = document.querySelector('.clear-input');
+let prevNum = 0 ;
 
-num.forEach(n => { //get any clicked number
-    n.addEventListener('click',function(event){
-        let new_number = event.target.value;
-        arr.push(new_number);
-        first_num = Number(arr.join(''))
-        showInput(first_num);
+numButton.forEach(n => { //get any clicked number
+    n.addEventListener('click',(event) => {
+        appendNumber(event.target.value);
     })
 });
- 
-//get any clicked operator
-sum.addEventListener('click',function(){
-    clear();
-    calculate('sum');
+
+operator.forEach(op => { //get any clicked opertaor
+    op.addEventListener('click',(event) => {
+        chooseOperation(event.target.value);
+    })
+});
+
+clearAll.addEventListener('click',() => {
+    currentNum.value = '';
+    prevNum = '';
+});
+
+equal.addEventListener('click',() => {
+    compute();
 })
-divde.addEventListener('click',function(){
-    clear();
-    calculate('divde');
-})
-multiply.addEventListener('click',function(){
-    clear();
-    calculate('multiply');
-})
-subtract.addEventListener('click',function(){
-    clear();
-    calculate('subtract');
-})
-clearInput.addEventListener('click',function(){
-    arr = [];
-    calc_arr = [];
-    first_num = 0 ;
-    showInput(0);
-})
-// do calculations
-const calculate = (operator) => {
-    if(calc_arr.length == 0){
-        calc_arr.push(first_num);
-        clear();
-    } else {
-        calc_arr.push(first_num);  
-        let intial = 0;      
-        switch (operator) {
-            case 'sum':
-                intial =  calc_arr[0] + first_num;
-                    break;
-                case 'divde':
-                    intial =  calc_arr[0] / first_num;
-                    break;
-                case 'multiply':
-                    intial =  calc_arr[0]*first_num;
-                    break;
-                case 'subtract':
-                    intial =  calc_arr[0]-first_num;
-                    break;
-                default:
-                    break;
-            }
-        showInput(intial);
+
+const appendNumber = (number) =>{ //add more than single number
+    if(number === '.' && currentNum.value.includes('.')) return
+    currentNum.value = currentNum.value + number ;
+}
+
+const chooseOperation = (opr) => {
+    if(currentNum.value === '') return
+    if(prevNum !== ''){
+        compute();
     }
+    prevNum = currentNum.value;
+    console.log(prevNum);
+    currentNum.value = ''; 
+    operator.value = opr; 
 }
 
-//show result input
-const showInput = (number) =>{
-return results.value = number;
-}
-
-// clear result input
-const clear = () =>{
-   arr = [];
-   showInput(0);
+const compute = () => { //when press eqaul or another operator
+    let computation;
+    const curr = parseFloat(currentNum.value);
+    const prev = parseFloat(prevNum);
+    if(isNaN(curr)|| isNaN(prev)) return
+    switch (operator.value) {
+        case '+':
+            computation = prev + curr;
+        break;
+        case '-':
+            computation = prev - curr;
+        break;
+        case '*':
+            computation = prev * curr;
+        break;
+        case '/':
+            computation = prev / curr;
+        break;    
+        case '%':
+            computation = prev % curr;
+        break; 
+        default:
+            return;
+    }
+    currentNum.value = computation;
+    prevNum = '';
 }
