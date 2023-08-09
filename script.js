@@ -1,8 +1,9 @@
-let numButton = document.querySelectorAll('.number');
-let equal = document.querySelector('.equal');
-let operator = document.querySelectorAll('.operator');
-let currentNum = document.getElementById("results");
-let clearAll = document.querySelector('.clear-input');
+const numButton = document.querySelectorAll('.number');
+const equal = document.querySelector('.equal');
+const operator = document.querySelectorAll('.operator');
+const currentNum = document.getElementById("results");
+const clearAll = document.querySelector('.clear-input');
+const sign = document.querySelector('.sign');
 let prevNum = 0 ;
 
 numButton.forEach(n => { //get any clicked number
@@ -26,6 +27,15 @@ equal.addEventListener('click',() => {
     compute();
 })
 
+sign.addEventListener('click',() => {
+    changeSign(currentNum.value);
+})
+
+const changeSign = (number) =>{
+    if(prevNum === 0 && currentNum.value !== ''){
+        currentNum.value = - number;
+    }
+}
 const appendNumber = (number) =>{ //add more than single number
     if(number === '.' && currentNum.value.includes('.')) return
     currentNum.value = currentNum.value + number ;
