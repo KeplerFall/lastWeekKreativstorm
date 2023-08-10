@@ -44,7 +44,7 @@ const operate = (arg)=>{
 }
 
 const buttonInput = (value)=>{
-    if(/(ERROR)/g.test(input.value)) mainInput.value = ""
+    if(/(ERROR)/g.test(mainInput.value)) mainInput.value = ""
 
     if(/[0-9]/g.test(value)){//Number input
         let arr = mainInput.value.split("")
