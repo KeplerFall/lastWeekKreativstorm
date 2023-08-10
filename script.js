@@ -1,84 +1,81 @@
-let arr = []; //store clicked numbers 
-let calc_arr = []; //use it store numbers for calculations
-let first_num; // join() arr numbers 
+let mainInput = null
+let sobInput = null
+let operator = null
+let numbers = []
 
-let num = document.querySelectorAll('.number');
-let equal = document.querySelector('.equal');
-let modules = document.querySelector('.modules');
-let divde = document.querySelector('.divde');
-let multiply = document.querySelector('.multiply');
-let sum = document.querySelector('.sum');
-let subtract = document.querySelector('.subtract');
-let results = document.getElementById("results");
-let clearInput = document.querySelector('.clear-input');
+window.addEventListener("load",()=>{
+    mainInput = document.querySelector("#results")
+    additionalValues = document.querySelector("#additionalValues")
+    mainInput.addEventListener("input", event => manualInput(event))
+    document.querySelector("form").addEventListener("submit", event=> submitEvent(event))
+    sobInput = document.querySelector("#additionalValues")
+})
 
-num.forEach(n => { //get any clicked number
-    n.addEventListener('click',function(event){
-        let new_number = event.target.value;
-        arr.push(new_number);
-        first_num = Number(arr.join(''))
-        showInput(first_num);
-    })
-});
- 
-//get any clicked operator
-sum.addEventListener('click',function(){
-    clear();
-    calculate('sum');
-})
-divde.addEventListener('click',function(){
-    clear();
-    calculate('divde');
-})
-multiply.addEventListener('click',function(){
-    clear();
-    calculate('multiply');
-})
-subtract.addEventListener('click',function(){
-    clear();
-    calculate('subtract');
-})
-clearInput.addEventListener('click',function(){
-    arr = [];
-    calc_arr = [];
-    first_num = 0 ;
-    showInput(0);
-})
-// do calculations
-const calculate = (operator) => {
-    if(calc_arr.length == 0){
-        calc_arr.push(first_num);
-        clear();
-    } else {
-        calc_arr.push(first_num);  
-        let intial = 0;      
-        switch (operator) {
-            case 'sum':
-                intial =  calc_arr[0] + first_num;
-                    break;
-                case 'divde':
-                    intial =  calc_arr[0] / first_num;
-                    break;
-                case 'multiply':
-                    intial =  calc_arr[0]*first_num;
-                    break;
-                case 'subtract':
-                    intial =  calc_arr[0]-first_num;
-                    break;
-                default:
-                    break;
-            }
-        showInput(intial);
+const submitEvent = (event)=>{
+    event.preventDefault()
+    buttonInput("submit")
+}
+
+const operate = (arg)=>{
+    console.log("Operate function inside")
+    console.log("Em ordem o qq ta acontecendo", {operator: operator, numberLength: numbers.length, mainInputValue: mainInput.value})
+    if(numbers.length <= 1 || !operator) return;
+     if(!operator || numbers.length == 0 || mainInput.value == null) return;
+     console.log("Inside operate, passou do return")
+     switch(operator){
+        case "+":
+            mainInput.value = numbers[numbers.length -1] + numbers[numbers.length -2]
+            break;
+        case "-":
+            mainInput.value = numbers[numbers.length -2] - numbers[numbers.length -1]
+            break;
+        case "*":
+            mainInput.value = numbers[numbers.length -2] - numbers[numbers.length -1]
+            break;
+        case "/":
+            if(numbers[numbers.length -1] == 0){mainInput.value = "ERROR"; numbers.pop()}
+            else mainInput.value = numbers[numbers.length -2] / numbers[numbers.length -1]
+            break;
+     }
+
+
+     if(arg) operator = null;
+
+}
+
+const buttonInput = (value)=>{
+    if(mainInput.value == "ERROR") mainInput.value = ""
+
+    if(/[0-9]/g.test(value)){//Number input
+        let arr = mainInput.value.split("")
+        arr.push(value)
+        mainInput.value = arr.join("")
+    }
+    if(/(\+|\-|\-|\/|\*|(submit))/g.test(value)){ // Operation
+        console.log("buttonInput", {value: value, operate})
+        if(mainInput.value == null || mainInput.value == "") return;
+        numbers.push(parseFloat(mainInput.value))
+        if(operator == value || value == "submit" || value == "="){console.log("igual caralho");operate("equal")}
+        else{operator = value;mainInput.value = ""}
+
+    }
+    if(/\./g.test(value)){
+        let arr = mainInput.value.split("")
+        if(arr.includes(".")) return;
+        if(arr.length == 0) {arr.push(0)}
+        arr.push(".")
+        mainInput.value = arr.join("")
+    }
+    if(value == "Ac"){
+
     }
 }
 
-//show result input
-const showInput = (number) =>{
-return results.value = number;
-}
-
-// clear result input
-const clear = () =>{
-   arr = [];
-   showInput(0);
+const manualInput = (event)=>{
+    const data = event.data 
+    if(data == null) return;
+    let arr = mainInput.value.split("")
+    arr.pop()
+    mainInput.value = arr.join("")
+    if(/\+|\-|\-|\/|\.|[0-9]/g.test(data)) buttonInput(data)
 }
