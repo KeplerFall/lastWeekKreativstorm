@@ -77,5 +77,5 @@ const manualInput = (event)=>{
     let arr = mainInput.value.split("")
     arr.pop()
     mainInput.value = arr.join("")
-    if(/\+|\-|\-|\/|\.|[0-9]/g.test(data)) buttonInput(data)
+    if(/\+|\-|\-|\/|\.|\*|[0-9]/g.test(data)) buttonInput(data)
 }
