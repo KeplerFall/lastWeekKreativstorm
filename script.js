@@ -30,7 +30,7 @@ const operate = (arg)=>{
             mainInput.value = numbers[numbers.length -2] - numbers[numbers.length -1]
             break;
         case "*":
-            mainInput.value = numbers[numbers.length -2] - numbers[numbers.length -1]
+            mainInput.value = numbers[numbers.length -2] * numbers[numbers.length -1]
             break;
         case "/":
             if(numbers[numbers.length -1] == 0){mainInput.value = "ERROR"; numbers.pop()}
