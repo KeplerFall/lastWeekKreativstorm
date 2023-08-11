@@ -10,6 +10,25 @@ window.addEventListener("load",()=>{
     document.querySelector("form").addEventListener("submit", event=> submitEvent(event))
 })
 
+const sum = (a,b)=>{
+    return a + b 
+}
+
+const min = (a,b)=>{
+    return a - b 
+}
+
+const mul = (a,b)=>{
+    return a * b 
+}
+
+const div = (a,b)=>{
+    if(b == 0){numbers.pop();return "ERROR";}
+    else return a / b
+}
+
+
+
 const submitEvent = (event)=>{
     event.preventDefault()
     buttonInput("submit")
@@ -20,17 +39,16 @@ const operate = (arg)=>{
      if(!operator || numbers.length == 0 || mainInput.value == null) return;
      switch(operator){
         case "+":
-            mainInput.value = numbers[numbers.length -1] + numbers[numbers.length -2]
+            mainInput.value = sum(numbers[numbers.length -1], numbers[numbers.length -2])
             break;
         case "-":
-            mainInput.value = numbers[numbers.length -2] - numbers[numbers.length -1]
+            mainInput.value = min(numbers[numbers.length -2], numbers[numbers.length -1] )
             break;
         case "*":
-            mainInput.value = numbers[numbers.length -2] * numbers[numbers.length -1]
+            mainInput.value = mul(numbers[numbers.length -2],numbers[numbers.length -1])
             break;
         case "/":
-            if(numbers[numbers.length -1] == 0){mainInput.value = "ERROR"; numbers.pop()}
-            else mainInput.value = numbers[numbers.length -2] / numbers[numbers.length -1]
+            mainInput.value = div(numbers[numbers.length -2],numbers[numbers.length -1])
             break;
      }
 
