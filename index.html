@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
+
     <title>Document</title>
 </head>
 <body>
@@ -13,77 +14,79 @@
             <tr>
                 <th colspan="4" >
                     <input type="text" id="results"/>
+                    <div class="curr"></div>
                 </th>
             </tr>
             <tr>
                 <td>
-                    <input type="button" value="Ac" onclick=""/>
+                    <input type="button" value="Ac" class="clear-input"/>
                 </td>
                 <td>
-                    <input type="button" value="+/-" onclick=""/>
+                    <input type="button" value="+/-" class="sign"/>
                 </td>
                 <td>
-                    <input type="button" value="%" onclick=""/>
+                    <input type="button" value="%" class="modules operator" />
                 </td>
                 <td>
-                    <input type="button" value="/" onclick=""/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="button" value="7" onclick=""/>
-                </td>
-                <td>
-                    <input type="button" value="8" onclick=""/>
-                </td>
-                <td>
-                    <input type="button" value="9" onclick=""/>
-                </td>
-                <td>
-                    <input type="button" value="*" onclick=""/>
+                    <input type="button" value="/" class="divde operator" />
                 </td>
             </tr>
             <tr>
                 <td>
-                    <input type="button" value="4" onclick=""/>
+                    <input type="button" value="7" class="number" />
                 </td>
                 <td>
-                    <input type="button" value="5" onclick=""/>
+                    <input type="button" value="8" class="number" />
                 </td>
                 <td>
-                    <input type="button" value="6" onclick=""/>
+                    <input type="button" value="9" class="number" />
                 </td>
                 <td>
-                    <input type="button" value="-" onclick=""/>
+                    <input type="button" value="*" class="multiply operator" />
                 </td>
             </tr>
             <tr>
                 <td>
-                    <input type="button" value="1" onclick=""/>
+                    <input type="button" value="4" class="number" />
                 </td>
                 <td>
-                    <input type="button" value="2" onclick=""/>
+                    <input type="button" value="5" class="number" />
                 </td>
                 <td>
-                    <input type="button" value="3" onclick=""/>
+                    <input type="button" value="6" class="number" />
                 </td>
                 <td>
-                    <input type="button" value="+" onclick=""/>
+                    <input type="button" value="-" class="subtract operator" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="button" value="1" class="number" />
+                </td>
+                <td>
+                    <input type="button" value="2" class="number" />
+                </td>
+                <td>
+                    <input type="button" value="3" class="number" />
+                </td>
+                <td>
+                    <input type="button" value="+" class="sum operator" />
                 </td>
             </tr>
             <tr>
                 <td colspan="2">
-                    <input type="button" value="0" onclick="" id="cellzero"/>
+                    <input type="button" value="0" class="number" />
                 </td>
                 <td>
-                    <input type="button" value="." onclick=""/>
+                    <input type="button" value="." class="decimal number" />
                 </td>
                 <td>
-                    <input type="button" value="=" onclick=""/>
+                    <input type="button" value="=" class="equal" />
                 </td>
             </tr>
         </table>
     
     <footer></footer>
+    <script src="script.js"></script>
 </body>
 </html>
