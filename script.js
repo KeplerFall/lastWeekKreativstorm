@@ -1,5 +1,4 @@
 let mainInput = null
-let sobInput = null
 let operator = null
 let clear = false;
 let numbers = []
@@ -9,7 +8,6 @@ window.addEventListener("load",()=>{
     additionalValues = document.querySelector("#additionalValues")
     mainInput.addEventListener("input", event => manualInput(event))
     document.querySelector("form").addEventListener("submit", event=> submitEvent(event))
-    sobInput = document.querySelector("#additionalValues")
 })
 
 const submitEvent = (event)=>{
@@ -64,8 +62,12 @@ const buttonInput = (value)=>{
         arr.push(".")
         mainInput.value = arr.join("")
     }
-    if(value == "Ac"){
 
+    if(value == "Ac"){
+        mainInput.value = ""
+        operator = null
+        clear = false;
+        numbers = []
     }
 }
 
