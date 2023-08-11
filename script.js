@@ -87,6 +87,12 @@ const buttonInput = (value)=>{
         clear = false;
         numbers = []
     }
+    
+    if(value == "undo"){
+        if(numbers.length == 0){mainInput.value = ""; return;}
+        mainInput.value = numbers[numbers.length -1]
+        numbers.pop()
+    }
 }
 
 const manualInput = (event)=>{

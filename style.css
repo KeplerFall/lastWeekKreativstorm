@@ -166,3 +166,13 @@ th {
         }
     }
 }
+
+
+.undoButton{
+    background-image: url('./src/images/undo.png');
+    background-size:contain;
+    color: #cccccc;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
