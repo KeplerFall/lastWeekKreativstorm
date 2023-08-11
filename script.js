@@ -1,6 +1,7 @@
 let mainInput = null
 let sobInput = null
 let operator = null
+let clear = false;
 let numbers = []
 
 window.addEventListener("load",()=>{
@@ -17,11 +18,8 @@ const submitEvent = (event)=>{
 }
 
 const operate = (arg)=>{
-    console.log("Operate function inside")
-    console.log("Em ordem o qq ta acontecendo", {operator: operator, numberLength: numbers.length, mainInputValue: mainInput.value})
     if(numbers.length <= 1 || !operator) return;
      if(!operator || numbers.length == 0 || mainInput.value == null) return;
-     console.log("Inside operate, passou do return")
      switch(operator){
         case "+":
             mainInput.value = numbers[numbers.length -1] + numbers[numbers.length -2]
@@ -47,16 +45,16 @@ const buttonInput = (value)=>{
     if(/(ERROR)/g.test(mainInput.value)) mainInput.value = ""
 
     if(/[0-9]/g.test(value)){//Number input
+        if(clear) {mainInput.value = ""; clear = false;}
         let arr = mainInput.value.split("")
         arr.push(value)
         mainInput.value = arr.join("")
     }
     if(/(\+|\-|\-|\/|\*|(submit))/g.test(value)){ // Operation
-        console.log("buttonInput", {value: value, operate})
         if(mainInput.value == null || mainInput.value == "") return;
         numbers.push(parseFloat(mainInput.value))
-        if(operator == value || value == "submit" || value == "="){console.log("igual caralho");operate("equal")}
-        else{operator = value;mainInput.value = ""}
+        if(operator == value || value == "submit" || value == "="){operate("equal")}
+        else{operator = value;clear = true;}
 
     }
     if(/\./g.test(value)){
