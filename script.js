@@ -60,21 +60,21 @@ const operate = (arg)=>{
 const buttonInput = (value)=>{
     if(/(ERROR)/g.test(mainInput.value)) mainInput.value = ""
 
-    if(/[0-9]/g.test(value)){//Number input
+    if(/[0-9]/g.test(value)){//Regex to see if is a number
         if(mayDelete){ mainInput.value = "";mayDelete = false;}
         if(clear) {mainInput.value = ""; clear = false;}
         let arr = mainInput.value.split("")
         arr.push(value)
         mainInput.value = arr.join("")
     }
-    if(/(\+|\-|\-|\/|\*|(submit))/g.test(value)){ // Operation
+    if(/(\+|\-|\/|\*|(submit))/g.test(value)){ // This RegExp Check if the input is +,-, *, / or submit
         if(mainInput.value == null || mainInput.value == "") return;
         numbers.push(parseFloat(mainInput.value))
         if(operator == value || value == "submit" || value == "="){operate("equal")}
         else{operator = value;clear = true;}
 
     }
-    if(/\./g.test(value)){
+    if(/\./g.test(value)){ // Regex to test if its a decimal dot
         let arr = mainInput.value.split("")
         if(arr.includes(".")) return;
         if(arr.length == 0) {arr.push(0)}
