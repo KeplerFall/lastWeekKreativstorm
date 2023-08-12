@@ -1,6 +1,7 @@
 let mainInput = null
 let operator = null
 let clear = false;
+let mayDelete = false;
 let numbers = []
 
 window.addEventListener("load",()=>{
@@ -51,8 +52,7 @@ const operate = (arg)=>{
             mainInput.value = div(numbers[numbers.length -2],numbers[numbers.length -1])
             break;
      }
-
-
+     mayDelete = true;
      if(arg) operator = null;
 
 }
@@ -61,6 +61,7 @@ const buttonInput = (value)=>{
     if(/(ERROR)/g.test(mainInput.value)) mainInput.value = ""
 
     if(/[0-9]/g.test(value)){//Number input
+        if(mayDelete){ mainInput.value = "";mayDelete = false;}
         if(clear) {mainInput.value = ""; clear = false;}
         let arr = mainInput.value.split("")
         arr.push(value)
