@@ -1,10 +1,8 @@
-const numButton = document.querySelectorAll('.number');
-const equal = document.querySelector('.equal');
-const operator = document.querySelectorAll('.operator');
-const currentNum = document.getElementById("results");
-const clearAll = document.querySelector('.clear-input');
-const sign = document.querySelector('.sign');
-let prevNum = 0;
+let mainInput = null
+let operator = null
+let clear = false;
+let mayDelete = false;
+let numbers = []
 
 window.addEventListener("load",()=>{
     mainInput = document.querySelector("#results")
@@ -21,9 +19,9 @@ const min = (a,b)=>{
     return a - b 
 }
 
-equal.addEventListener('click',() => {
-    calculate();
-})
+const mul = (a,b)=>{
+    return a * b 
+}
 
 const div = (a,b)=>{
     if(b == 0){numbers.pop();return "ERROR";}
@@ -59,40 +57,50 @@ const operate = (arg)=>{
 
 }
 
-const chooseOperation = (opr) => {
-    if(currentNum.value === '') return
-    if(prevNum !== ''){
-        calculate();
+const buttonInput = (value)=>{
+    if(/(ERROR)/g.test(mainInput.value)) mainInput.value = ""
+
+    if(/[0-9]/g.test(value)){//Regex to see if is a number
+        if(mayDelete){ mainInput.value = "";mayDelete = false;}
+        if(clear) {mainInput.value = ""; clear = false;}
+        let arr = mainInput.value.split("")
+        arr.push(value)
+        mainInput.value = arr.join("")
     }
-    prevNum = currentNum.value;
-    currentNum.value = ''; 
-    operator.value = opr; 
+    if(/(\+|\-|\/|\*|(submit))/g.test(value)){ // This RegExp Check if the input is +,-, *, / or submit
+        if(mainInput.value == null || mainInput.value == "") return;
+        numbers.push(parseFloat(mainInput.value))
+        if(operator == value || value == "submit" || value == "="){operate("equal")}
+        else{operator = value;clear = true;}
+
+    }
+    if(/\./g.test(value)){ // Regex to test if its a decimal dot
+        let arr = mainInput.value.split("")
+        if(arr.includes(".")) return;
+        if(arr.length == 0) {arr.push(0)}
+        arr.push(".")
+        mainInput.value = arr.join("")
+    }
+
+    if(value == "Ac"){
+        mainInput.value = ""
+        operator = null
+        clear = false;
+        numbers = []
+    }
+    
+    if(value == "undo"){
+        if(numbers.length == 0){mainInput.value = ""; return;}
+        mainInput.value = numbers[numbers.length -1]
+        numbers.pop()
+    }
 }
 
-const calculate = () => { //when press eqaul or another operator
-    let calc;
-    const curr = parseFloat(currentNum.value);
-    const prev = parseFloat(prevNum);
-    if(isNaN(curr)|| isNaN(prev)) return
-    switch (operator.value) {
-        case '+':
-            calc = prev + curr;
-        break;
-        case '-':
-            calc = prev - curr;
-        break;
-        case '*':
-            calc = prev * curr;
-        break;
-        case '/':
-            calc = prev / curr;
-        break;    
-        case '%':
-            calc = prev % curr;
-        break; 
-        default:
-            return
-    }
-    currentNum.value = calc;
-    prevNum = '';
+const manualInput = (event)=>{
+    const data = event.data 
+    if(data == null) return;
+    let arr = mainInput.value.split("")
+    arr.pop()
+    mainInput.value = arr.join("")
+    if(/\+|\-|\-|\/|\.|\*|[0-9]/g.test(data)) buttonInput(data)
 }
