@@ -6,39 +6,57 @@ const clearAll = document.querySelector('.clear-input');
 const sign = document.querySelector('.sign');
 let prevNum = 0;
 
-numButton.forEach(n => { //get any clicked number
-    n.addEventListener('click',(event) => {
-        appendNumber(event.target.value);
-    })
-});
+window.addEventListener("load",()=>{
+    mainInput = document.querySelector("#results")
+    additionalValues = document.querySelector("#additionalValues")
+    mainInput.addEventListener("input", event => manualInput(event))
+    document.querySelector("form").addEventListener("submit", event=> submitEvent(event))
+})
 
-operator.forEach(op => { //get any clicked opertaor
-    op.addEventListener('click',(event) => {
-        chooseOperation(event.target.value);
-    })
-});
+const sum = (a,b)=>{
+    return a + b 
+}
 
-clearAll.addEventListener('click',() => {
-    currentNum.value = '';
-    prevNum = '';
-});
+const min = (a,b)=>{
+    return a - b 
+}
 
 equal.addEventListener('click',() => {
     calculate();
 })
 
-sign.addEventListener('click',() => {
-    changeSign(currentNum.value);
-})
-
-const changeSign = (number) =>{
-    if(prevNum === 0 && currentNum.value !== ''){
-        currentNum.value = - number;
-    }
+const div = (a,b)=>{
+    if(b == 0){numbers.pop();return "ERROR";}
+    else return a / b
 }
-const appendNumber = (number) =>{ //add more than single number
-    if(number === '.' && currentNum.value.includes('.')) return
-    currentNum.value = currentNum.value + number ;
+
+
+
+const submitEvent = (event)=>{
+    event.preventDefault()
+    buttonInput("submit")
+}
+
+const operate = (arg)=>{
+    if(numbers.length <= 1 || !operator) return;
+     if(!operator || numbers.length == 0 || mainInput.value == null) return;
+     switch(operator){
+        case "+":
+            mainInput.value = sum(numbers[numbers.length -1], numbers[numbers.length -2])
+            break;
+        case "-":
+            mainInput.value = min(numbers[numbers.length -2], numbers[numbers.length -1] )
+            break;
+        case "*":
+            mainInput.value = mul(numbers[numbers.length -2],numbers[numbers.length -1])
+            break;
+        case "/":
+            mainInput.value = div(numbers[numbers.length -2],numbers[numbers.length -1])
+            break;
+     }
+     mayDelete = true;
+     if(arg) operator = null;
+
 }
 
 const chooseOperation = (opr) => {
