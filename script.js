@@ -4,7 +4,7 @@ const operator = document.querySelectorAll('.operator');
 const currentNum = document.getElementById("results");
 const clearAll = document.querySelector('.clear-input');
 const sign = document.querySelector('.sign');
-let prevNum = 0 ;
+let prevNum = 0;
 
 numButton.forEach(n => { //get any clicked number
     n.addEventListener('click',(event) => {
@@ -24,7 +24,7 @@ clearAll.addEventListener('click',() => {
 });
 
 equal.addEventListener('click',() => {
-    compute();
+    calculate();
 })
 
 sign.addEventListener('click',() => {
@@ -44,38 +44,37 @@ const appendNumber = (number) =>{ //add more than single number
 const chooseOperation = (opr) => {
     if(currentNum.value === '') return
     if(prevNum !== ''){
-        compute();
+        calculate();
     }
     prevNum = currentNum.value;
-    console.log(prevNum);
     currentNum.value = ''; 
     operator.value = opr; 
 }
 
-const compute = () => { //when press eqaul or another operator
-    let computation;
+const calculate = () => { //when press eqaul or another operator
+    let calc;
     const curr = parseFloat(currentNum.value);
     const prev = parseFloat(prevNum);
     if(isNaN(curr)|| isNaN(prev)) return
     switch (operator.value) {
         case '+':
-            computation = prev + curr;
+            calc = prev + curr;
         break;
         case '-':
-            computation = prev - curr;
+            calc = prev - curr;
         break;
         case '*':
-            computation = prev * curr;
+            calc = prev * curr;
         break;
         case '/':
-            computation = prev / curr;
+            calc = prev / curr;
         break;    
         case '%':
-            computation = prev % curr;
+            calc = prev % curr;
         break; 
         default:
-            return;
+            return
     }
-    currentNum.value = computation;
+    currentNum.value = calc;
     prevNum = '';
 }
