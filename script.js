@@ -82,7 +82,7 @@ function buttonInput(value) {
         expression = "";
     } else if (value === "undo" || value === "Backspace") {
         currentInput = currentInput.slice(0, -1);
-    } else if (value === "submit" || value === "Enter") {
+    } else if (value === "=" || value === "Enter") {
         expression += currentInput;
         const postfix = infixToPostfix(expression);
         currentInput = evaluatePostfix(postfix);
@@ -102,13 +102,14 @@ document.getElementById("results").addEventListener("input", function(event) {
 });
 
 document.addEventListener("keydown", function(event) {
+    event.preventDefault();  // Prevent default behavior for all keyboard events
     const key = event.key;
     if ((key >= "0" && key <= "9") || key === ".") {
         buttonInput(key);
     } else if (key === "+" || key === "-" || key === "*" || key === "/") {
         buttonInput(key);
-    } else if (key === "Enter" || key === "=") {
-        buttonInput("submit");
+    } else if (key === "Enter") {
+        buttonInput("=");
     } else if (key === "Backspace") {
         buttonInput("undo");
     }
