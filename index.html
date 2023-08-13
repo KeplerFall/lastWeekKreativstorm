@@ -10,22 +10,24 @@
 <body>
     <header></header>
     <main>
-        <table frame="box" rules="all" id="calcu" cellpadding="10" >
+        <table  id="calcu" cellpadding="10" >
+            <th id="results"colspan='4'>
+                <div class="previous"></div>
+                <div class="current"></div>
+            
+            </th>
             <tr>
-                <th colspan="4" >
-                    <input type="text" id="results"/>
-                    <div class="curr"></div>
-                </th>
-            </tr>
             <tr>
                 <td>
                     <input type="button" value="Ac" class="clear-input"/>
                 </td>
                 <td>
-                    <input type="button" value="+/-" class="sign"/>
+                   <button class="btn">
+                    <img src="undo image.jpeg" alt="" width="20px" height="30px" >
+                   </button>
                 </td>
                 <td>
-                    <input type="button" value="%" class="modules operator" />
+                    <input type="button" value="%" class="modulus operator" />
                 </td>
                 <td>
                     <input type="button" value="/" class="divde operator" />
@@ -78,7 +80,7 @@
                     <input type="button" value="0" class="number" />
                 </td>
                 <td>
-                    <input type="button" value="." class="decimal number" />
+                    <input type="button" value="." class="btn decimal" />
                 </td>
                 <td>
                     <input type="button" value="=" class="equal" />

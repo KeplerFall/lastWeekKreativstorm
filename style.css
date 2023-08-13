@@ -134,6 +134,16 @@ th {
     }
     #results {
         background: #ccc;
+        color: #000000;
+    }
+    .previous{
+        background: #ccc;
+        color: #000000;
+    }
+
+    .current {background: #ccc;
+        color: #000000;
+
     }
     .number, .decimal {
             background-color: #e6e6e6;
@@ -145,6 +155,11 @@ th {
     input {
         padding: 10px 15px;
         border-radius: 5px;
+    }
+    .btn{
+        border-radius: 5px;
+        padding: 10px;
+        
     }
     
     /*Prefers color scheme: dark + prefers contrast: more */
