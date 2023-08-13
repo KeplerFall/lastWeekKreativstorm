@@ -5,88 +5,87 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
 
-    <title>Document</title>
+    <title>Calculator</title>
 </head>
 <body>
-    <head></head>
-    <main>
-        <table frame="box" rules="all" id="calcu" cellpadding="10" >
-            <tr>
-                <th colspan="4" >
-                    <div id="results"></div>
-                    <div class="prevNum"></div>
-                </th>
-            </tr>
-            <tr>
-                <td>
-                    <input type="button" value="Ac" class="clear-input"/>
-                </td>
-                <td>
-                    <input type="button" value="undo" class="undo"/>
-                </td>
-                <td>
-                    <input type="button" value="%" class="modules operator" />
-                </td>
-                <td>
-                    <input type="button" value="/" class="divde operator" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="button" value="7" class="number" />
-                </td>
-                <td>
-                    <input type="button" value="8" class="number" />
-                </td>
-                <td>
-                    <input type="button" value="9" class="number" />
-                </td>
-                <td>
-                    <input type="button" value="*" class="multiply operator" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="button" value="4" class="number" />
-                </td>
-                <td>
-                    <input type="button" value="5" class="number" />
-                </td>
-                <td>
-                    <input type="button" value="6" class="number" />
-                </td>
-                <td>
-                    <input type="button" value="-" class="subtract operator" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="button" value="1" class="number" />
-                </td>
-                <td>
-                    <input type="button" value="2" class="number" />
-                </td>
-                <td>
-                    <input type="button" value="3" class="number" />
-                </td>
-                <td>
-                    <input type="button" value="+" class="sum operator" />
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <input type="button" value="0" class="number" />
-                </td>
-                <td>
-                    <input type="button" value="." class="decimal number" />
-                </td>
-                <td>
-                    <input type="button" value="=" class="equal" />
-                </td>
-            </tr>
-        </table>
+        <header></header>
+        <main>
+            <table frame="box" rules="all" id="calcu" cellpadding="10" >
+                <tr>
+                    <th colspan="4" >
+                        <div class="display">
+                            <div id="results"></div>
+                            <div class="prevNum"></div>
+                        </div>
+                    </th>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="button" value="Ac" class="clear-input"/>
+                    </td>
+                    <td>
+                        <input type="button" value="undo" class="undo"/>
+                    </td>
+                    <td>
+                        <input type="button" value="/" class="divde operator" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="button" value="7" class="number" />
+                    </td>
+                    <td>
+                        <input type="button" value="8" class="number" />
+                    </td>
+                    <td>
+                        <input type="button" value="9" class="number" />
+                    </td>
+                    <td>
+                        <input type="button" value="*" class="multiply operator" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="button" value="4" class="number" />
+                    </td>
+                    <td>
+                        <input type="button" value="5" class="number" />
+                    </td>
+                    <td>
+                        <input type="button" value="6" class="number" />
+                    </td>
+                    <td>
+                        <input type="button" value="-" class="subtract operator" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="button" value="1" class="number" />
+                    </td>
+                    <td>
+                        <input type="button" value="2" class="number" />
+                    </td>
+                    <td>
+                        <input type="button" value="3" class="number" />
+                    </td>
+                    <td>
+                        <input type="button" value="+" class="sum operator" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="button" value="0" class="number" />
+                    </td>
+                    <td>
+                        <input type="button" value="." class="decimal" />
+                    </td>
+                    <td>
+                        <input type="button" value="=" class="equal"/>
+                    </td>
+                </tr>
+            </table>
     
-    <footer></footer>
+        <footer></footer>
     <script src="script.js"></script>
 </body>
 </html>
