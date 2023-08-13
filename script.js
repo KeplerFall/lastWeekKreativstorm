@@ -22,9 +22,12 @@ operator.forEach(op => { //get any clicked opertaor
 clearAll.addEventListener('click',() => {
     currentNum.textContent = '';
     prevNum.textContent = '';
+    oprToggle = '';
 });
 
-    const isOperator = (token) => ['+', '-', '*', '/'].includes(token);
+equal.addEventListener('click',() => {
+    compute();
+})
 
 undoBtn.addEventListener('click',() => {
     if (currentNum.textContent) {
