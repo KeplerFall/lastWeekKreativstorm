@@ -53,6 +53,14 @@ const chooseOperation = (opr) => {
         } 
 }
 
+// function handleDecimal() {
+//   if (!currentNum.includes(".")) {
+//     currentNum += ".";
+    
+//   }
+//   currentNum.textContent = currentNum.textContent + currentNum
+// }
+
 const compute = () => { //when press eqaul or another operator
     let computation;
     const curr = parseFloat(currentNum.textContent);
