@@ -1,80 +1,94 @@
+@font-face {
+	font-family: calculator;
+	src: url(./src/fonts/Calculator.ttf);
+}
 
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    padding: 0;
-    color: #333;
+	font-family: 'Arial', sans-serif;
+	background-color: #f4f4f4;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	margin: 0;
+	padding: 0;
+	color: #333;
 }
 
 main {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	padding: 20px;
 }
 
-
-#results {
-    box-sizing: border-box;
-    width: 100%;
-    padding: 10px 20px;
-    font-size: 1.6em;
-    text-align: right;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 20px;
+.display {
+	box-sizing: border-box;
+	width: 100%;
+	padding: 20px 20px;
+	font-size: 1.6em;
+	text-align: right;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	margin-bottom: 20px;
+	font-family: calculator;
+	font-weight: bold;
 }
 
-
-
-input[type="button"] {
-    width: 100%;
-    padding: 10px;
-    font-size: 1.2em;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+input[type='button'] {
+	width: 100%;
+	padding: 10px;
+	font-size: 1.2em;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
 }
 
-
-.number, .decimal {
-    background-color: #e6e6e6;
-    color: #333;
+.number,
+.decimal {
+	background-color: #e6e6e6;
+	color: #333;
 }
 
-.sum, .subtract, .multiply, .divde, .modules, .equal {
-    background-color: #f78c6c;
-    color: #fff;
+.sum,
+.subtract,
+.multiply,
+.divde,
+.modules,
+.equal {
+	background-color: #f78c6c;
+	color: #fff;
 }
 
+.undoButton {
+	background-image: url('./src/images/undo.svg');
+	background-size: auto;
+	color: #cccccc;
+	background-repeat: no-repeat;
+	background-position: center;
+}
 .clear-input {
-    background-color: #ff6961;
-    color: #fff;
+	background-color: #ff6961;
+	color: #fff;
 }
 
-input[type="button"]:hover {
-    opacity: 0.9;
+input[type='button']:hover {
+	opacity: 0.9;
 }
-
 
 table {
-    width: 100%;
-    border-collapse: collapse;
+	width: 100%;
+	border-collapse: collapse;
 }
 
 td {
-    width: 25%;
-    padding: 5px;
+	width: 25%;
+	padding: 5px;
 }
 
 th {
-    padding-bottom: 20px;
+	padding-bottom: 20px;
 }
 
 /*----- MEDIA QUERIES FOR ACCESSIBILITY -----*/
@@ -82,43 +96,48 @@ th {
 /* Reduced motion */
 
 @media only screen and (prefers-reduced-motion: reduce) {
-    input[type="button"]:hover {
-        opacity: 1;
-    }
+	input[type='button']:hover {
+		opacity: 1;
+	}
 }
 
 /* Prefers contrast: more */
 
 @media only screen and (prefers-contrast: more) {
-    .number, .decimal {
-            background-color: #f6f6f6;
-            color: #333;
-        }
-        .sum, .subtract, .multiply, .divde, .modules, .equal {
-            background-color: #d76c2c;
-            color: #fff;
-        }
-        .clear-input {
-            background-color: #ff4941;
-            color: #fff;
-        }
+	.number,
+	.decimal {
+		background-color: #f6f6f6;
+		color: #333;
+	}
+	.sum,
+	.subtract,
+	.multiply,
+	.divde,
+	.modules,
+	.equal {
+		background-color: #d76c2c;
+		color: #fff;
+	}
+	.clear-input {
+		background-color: #ff4941;
+		color: #fff;
+	}
 }
 
 /* Prefers color scheme: light + prefers contrast: more */
 
 @media only screen and (prefers-color-scheme: light) {
-    @media only screen and (prefers-contrast: more) {
-        body {
-            background: #fff;
-        }
-        main {
-            background: #000;
-        }
-        #results {
-            background: #fff;
-        }
-    }
-
+	@media only screen and (prefers-contrast: more) {
+		body {
+			background: #fff;
+		}
+		main {
+			background: #000;
+		}
+		.display {
+			background: #fff;
+		}
+	}
 }
 
 /* Prefers color scheme: dark */
@@ -134,16 +153,6 @@ th {
     }
     #results {
         background: #ccc;
-        color: #000000;
-    }
-    .previous{
-        background: #ccc;
-        color: #000000;
-    }
-
-    .current {background: #ccc;
-        color: #000000;
-
     }
     .number, .decimal {
             background-color: #e6e6e6;
@@ -155,11 +164,6 @@ th {
     input {
         padding: 10px 15px;
         border-radius: 5px;
-    }
-    .btn{
-        border-radius: 5px;
-        padding: 10px;
-        
     }
     
     /*Prefers color scheme: dark + prefers contrast: more */

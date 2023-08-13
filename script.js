@@ -1,209 +1,81 @@
-document.addEventListener("DOMContentLoaded", function () {
-    let numbersList = document.querySelectorAll(".number");
-    let operatorsList = document.querySelectorAll(".operator");
-    let previousDisplay = document.querySelector(".previous");
-    let currentDisplay = document.querySelector(".current");
-    let clearBtn = document.querySelector(".clear-input");
-    let equalBtn = document.querySelector(".equal");
-    let decimalSymbol = document.querySelector(".btn decimal");
-    let deleteBtn = document.querySelector(".Btn");
-    let percentBtn = document.querySelector(".percentBtn");
-  
-    let operator = "";
-    let previousValue = "";
-    let currentValue = "";
-  
-    function add(a, b) {
-      return a + b;
+const numButton = document.querySelectorAll('.number');
+const equal = document.querySelector('.equal');
+const operator = document.querySelectorAll('.operator');
+const currentNum = document.getElementById("results");
+const clearAll = document.querySelector('.clear-input');
+const sign = document.querySelector('.sign');
+let prevNum = 0 ;
+
+numButton.forEach(n => { //get any clicked number
+    n.addEventListener('click',(event) => {
+        appendNumber(event.target.value);
+    })
+});
+
+operator.forEach(op => { //get any clicked opertaor
+    op.addEventListener('click',(event) => {
+        chooseOperation(event.target.value);
+    })
+});
+
+clearAll.addEventListener('click',() => {
+    currentNum.value = '';
+    prevNum = '';
+});
+
+equal.addEventListener('click',() => {
+    compute();
+})
+
+sign.addEventListener('click',() => {
+    changeSign(currentNum.value);
+})
+
+const changeSign = (number) =>{
+    if(prevNum === 0 && currentNum.value !== ''){
+        currentNum.value = - number;
     }
-  
-    function subtract(a, b) {
-      return a - b;
+}
+const appendNumber = (number) =>{ //add more than single number
+    if(number === '.' && currentNum.value.includes('.')) return
+    currentNum.value = currentNum.value + number ;
+}
+
+const chooseOperation = (opr) => {
+    if(currentNum.value === '') return
+    if(prevNum !== ''){
+        compute();
     }
-  
-    function multiply(a, b) {
-      return a * b;
+    prevNum = currentNum.value;
+    console.log(prevNum);
+    currentNum.value = ''; 
+    operator.value = opr; 
+}
+
+const compute = () => { //when press eqaul or another operator
+    let computation;
+    const curr = parseFloat(currentNum.value);
+    const prev = parseFloat(prevNum);
+    if(isNaN(curr)|| isNaN(prev)) return
+    switch (operator.value) {
+        case '+':
+            computation = prev + curr;
+        break;
+        case '-':
+            computation = prev - curr;
+        break;
+        case '*':
+            computation = prev * curr;
+        break;
+        case '/':
+            computation = prev / curr;
+        break;    
+        case '%':
+            computation = prev % curr;
+        break; 
+        default:
+            return;
     }
-  
-    function divide(a, b) {
-      if (b === 0) {
-        return NaN;
-      }
-      return a / b;
-    }
-  
-    //   handle numbers click event
-    function handleNumber(number) {
-      if (currentValue.length < 10) {
-        currentValue += number;
-        updateScreen();
-      }
-    }
-  
-    // handle operators click event
-    function handleOperator(op) {
-      if (previousValue && currentValue && operator) {
-        calculate();
-      }
-      if (currentValue) {
-        operator = op;
-        previousValue = currentValue;
-        currentValue = "";
-      } else if (previousValue) {
-        operator = op;
-      }
-      updateScreen(`${previousValue} ${operator}`);
-    }
-    
-    function handleDecimal() {
-        if (!currentValue.includes(".")) {
-          currentValue += ".";
-        }
-        updateScreen();
-      };
-   
-  
-    function resetValues() {
-      currentValue = "";
-      previousValue = "";
-      operator = "";
-      currentDisplay.textContent = "";
-      previousDisplay.textContent = "";
-    }
-  
-    // handle Equal button click
-    function calculate() {
-      if (previousValue !== "" && currentValue !== "") {
-        previousValue = Number(previousValue);
-        currentValue = Number(currentValue);
-  
-        switch (operator) {
-          case "+":
-            result = add(previousValue, currentValue);
-            break;
-          case "-":
-            result = subtract(previousValue, currentValue);
-            break;
-          case "*":
-            result = multiply(previousValue, currentValue);
-            break;
-          case "/":
-            result = divide(previousValue, currentValue);
-            break;
-          default:
-            alert(`Invalid Operator ${operator}`);
-            return false;
-        }
-        if (isNaN(result)) {
-          previousValue = "Cannot divide by 0";
-          currentValue = "";
-          updateScreen(previousValue);
-        } else {
-          let roundedNumber = roundNumber(result);
-          saveSingleOperation(
-            previousValue,
-            operator,
-            currentValue,
-            roundedNumber
-          );
-          updateScreen(
-            `${previousValue} ${operator} ${currentValue}`,
-            roundedNumber.toString()
-          );
-          previousValue = roundedNumber.toString();
-          currentValue = "";
-          operator = "";
-        }
-      }
-    }
-  
-    function roundNumber(number) {
-      if (+number % 1 !== 0) {
-        return parseFloat(number.toFixed(4));
-      }
-      return number;
-    }
-  
-    // update display
-    function updateScreen(previous, current) {
-      if (previous) previousDisplay.textContent = previous;
-      currentDisplay.textContent = current || currentValue;
-    }
-  
-    // save operation in history div
-    function saveSingleOperation(num1, op, num2, result) {
-      const li = document.createElement("li");
-      li.innerHTML = `${num1} ${op} ${num2} =<br/> <strong> ${result}</strong>`;
-      li.addEventListener("click", () => handleListClick(num1, op, result, num2));
-      operationsList.append(li);
-    }
-  
-    function handleListClick(num1, op, result, num2) {
-      previousDisplay.textContent = num1 + " " + op + " " + num2;
-      currentDisplay.textContent = result;
-      previousValue = result;
-    }
-  
-    currentDisplay.textContent = currentValue;
-  
-    numbersList.forEach((number) =>
-      number.addEventListener("click", () => handleNumber(number.textContent))
-    );
-  
-    operatorsList.forEach((op) =>
-      op.addEventListener("click", () => handleOperator(op.textContent))
-    );
-  
-    // decimal & delete btn
-    decimalSymbol.addEventListener("click",  handleDecimal)
-  
-    deleteBtn.addEventListener("click", function () {
-      if (currentValue) {
-        currentValue = currentValue.slice(0, -1);
-        updateScreen("", currentValue || "0");
-      }
-    });
-  
-    // handle Clear btn click & plus/minus btn click
-    clearBtn.addEventListener("click", function () {
-      resetValues();
-    });
-  
-    // handle x% button
-    percentBtn.addEventListener("click", function () {
-      if (currentValue && previousValue) {
-        currentValue = Number(currentValue) / 100;
-        updateScreen();
-      }
-    });
-    equalBtn.addEventListener("click", calculate);
-  
-    // Keyboard support
-    document.addEventListener("keydown", (event) => {
-      const key = event.key;
-  
-      // add hover effect to clicked key
-      if (/[\d\+\-\*\/.]/.test(key)) {
-        document.querySelector(`[value="${key}"]`).classList.add("hovered");
-      }
-  
-      if (/[\+\-\*\/]/.test(key)) {
-        handleOperator(key);
-      } else if (/[\d]/.test(key)) {
-        handleNumber(key);
-      } else if (key === "Enter" || key === "Return") {
-        event.preventDefault();
-        calculate();
-      } else if (key === "Escape") {
-        resetValues();
-      } else if (key === ".") {
-        handleDecimal();
-      }
-    });
-    document.addEventListener("keyup", ({ key }) => {
-      if (/[\d\+\-\*\/.]/.test(key)) {
-        document.querySelector(`[value="${key}"]`).classList.remove("hovered");
-      }
-    });
-  
-  });
+    currentNum.value = computation;
+    prevNum = '';
+}
