@@ -22,7 +22,7 @@ main {
 	padding: 20px;
 }
 
-#results {
+.display {
 	box-sizing: border-box;
 	width: 100%;
 	padding: 10px 20px;
@@ -134,7 +134,7 @@ th {
 		main {
 			background: #000;
 		}
-		#results {
+		.display {
 			background: #fff;
 		}
 	}
@@ -151,7 +151,7 @@ th {
 		background: #aaa;
 		box-shadow: 8px 8px 0 0 #000;
 	}
-	#results {
+	.display {
 		background: #ccc;
 	}
 	.number,
