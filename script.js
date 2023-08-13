@@ -98,9 +98,15 @@ document.addEventListener('keydown', function(event) {
       chooseOperation(key);
     } else if (key === '.' ||  key === ',') {
       appendNumber('.');
-    } else if (key === 'Enter') {
+    } else if (key === 'Enter' || key === 'Return') {
+      event.preventDefault();
      compute();
-    } else if (key === 'Escape') {
+    } else if (key === 'Backspace') {
+      if (currentNum.textContent) {
+        currentNum.textContent = currentNum.textContent.slice(0, -1);
+      }return;
+    }
+      else if (key === 'Escape') {
        currentNum.textContent = '';
        prevNum.textContent = '';
     }
