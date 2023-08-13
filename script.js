@@ -2,7 +2,7 @@ const numButton = document.querySelectorAll('.number');
 const equal = document.querySelector('.equal');
 const operator = document.querySelectorAll('.operator');
 const clearAll = document.querySelector('.clear-input');
-const undoBtn = document.querySelector('.undo');
+const undoBtn = document.querySelector('.undoButton');
 const currentNum = document.getElementById("results");
 const prevNum = document.querySelector(".prevNum");
 let oprToggle;
